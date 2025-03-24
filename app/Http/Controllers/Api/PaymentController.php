@@ -42,6 +42,7 @@ class PaymentController extends Controller
             if($name !='' && $amount !=''){            
                 $merchantId = config('phonepe.merchantId');
                 $apiKey = config('phonepe.apiKey');
+                print_r($apiKey);
                 $redirectUrl = route('confirm');
                 $order_id = uniqid(); // Generate unique order id
     
