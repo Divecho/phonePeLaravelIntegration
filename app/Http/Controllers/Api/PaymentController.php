@@ -32,7 +32,6 @@ class PaymentController extends Controller
 
 
     public function submitPaymentForm(Request $request) {
-        // $apiKey = config('phonepe.apiKey');
             $decrypted = $this->decryptData($request['data']);
             // dd($decrypted);
             $name = $decrypted['username'];
@@ -42,7 +41,7 @@ class PaymentController extends Controller
 
             if($name !='' && $amount !=''){            
                 $merchantId = config('phonepe.merchantId');
-                $apiKey = "356ee497-c269-41dd-b3ec-e1a0efd86002";
+                $apiKey = config('phonepe.apiKey');
                 $redirectUrl = route('confirm');
                 $order_id = uniqid(); // Generate unique order id
     
@@ -65,7 +64,7 @@ class PaymentController extends Controller
                     print_r($apiKey);
                     print_r($payloadMain);
                     $salt_index = 1;
-                    $payload = $payloadMain . "/pg/v1/pay" . "356ee497-c269-41dd-b3ec-e1a0efd86002";
+                    $payload = $payloadMain . "/pg/v1/pay" . $apiKey;
                     $sha256 = hash("sha256",$payload);
                     $final_x_header = $sha256 . '###' . $salt_index;
                     print_r($final_x_header);
