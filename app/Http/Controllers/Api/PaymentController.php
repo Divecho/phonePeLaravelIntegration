@@ -61,11 +61,12 @@ class PaymentController extends Controller
 
                     $encode = json_encode($transaction_data);
                     $payloadMain = base64_encode($encode);
+                    print_r($apiKey);
                     print_r($payloadMain);
                     $salt_index = 1;
                     $payload = $payloadMain . "/pg/v1/pay" . $apiKey;
                     $sha256 = hash("sha256",$payload);
-                    $final_x_header = $sha256 + '###' + $salt_index;
+                    $final_x_header = $sha256 . '###' . $salt_index;
                     print_r($final_x_header);
 
                    
