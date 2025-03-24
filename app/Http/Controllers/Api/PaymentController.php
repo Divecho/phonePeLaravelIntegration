@@ -65,7 +65,7 @@ class PaymentController extends Controller
                     print_r($apiKey);
                     print_r($payloadMain);
                     $salt_index = 1;
-                    $payload = $payloadMain . "/pg/v1/pay" . $apiKey;
+                    $payload = $payloadMain . "/pg/v1/pay" . "356ee497-c269-41dd-b3ec-e1a0efd86002";
                     $sha256 = hash("sha256",$payload);
                     $final_x_header = $sha256 . '###' . $salt_index;
                     print_r($final_x_header);
