@@ -103,6 +103,7 @@ class PaymentController extends Controller
                 } else {
                 $res = json_decode($response);
 
+                print_r($err);
                 // Store information into database
 
                 $data = [
