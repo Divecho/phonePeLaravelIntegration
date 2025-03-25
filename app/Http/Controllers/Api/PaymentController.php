@@ -73,7 +73,7 @@ class PaymentController extends Controller
                     print_r($final_x_header);
 
                    
-                    $request = json_encode(array('request'=>$payloadMain));
+                    // $request = json_encode(array('request'=>$payloadMain));
                     
                     $curl = curl_init();
 
@@ -85,10 +85,10 @@ class PaymentController extends Controller
                     CURLOPT_TIMEOUT => 30,
                     CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
                     CURLOPT_CUSTOMREQUEST => "POST",
-                    CURLOPT_POSTFIELDS => $request,
+                    CURLOPT_POSTFIELDS => json_encode(['request' => $payloadMain]),
                         CURLOPT_HTTPHEADER => [
                             "Content-Type: application/json",
-                            "X-VERIFY: " . $final_x_header,
+                            "X-VERIFY: " .$final_x_header,
                             "accept: application/json"
                         ],
                     ]);
