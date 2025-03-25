@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use App\Models\Payment;
+use Dipesh79\LaravelPhonePe\LaravelPhonePe;
 
 class PaymentController extends Controller
 {
@@ -40,9 +41,9 @@ class PaymentController extends Controller
 
 
             if($name !='' && $amount !=''){            
-                $merchantId = config('phonepe.merchantId');
+                // $merchantId = config('phonepe.merchantId');
                 $apiKey12 = config('phonepe.apiKey');
-                // $merchantId = "PGTESTPAYUAT";
+                $merchantId = "SU2503212055095835773447";
                 // $apiKey12 = "099eb0cd-02cf-4e2a-8aca-3e6c6aff0399";
                 print_r($apiKey12);
                 $redirectUrl = route('confirm');
