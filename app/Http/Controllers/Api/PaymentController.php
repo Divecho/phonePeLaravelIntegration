@@ -63,51 +63,55 @@ class PaymentController extends Controller
                     )
                 );
 
+                $phonepe = new LaravelPhonePe();
+            // amount, phone number, callback URL, unique merchant transaction id
+            $url = $phonepe->makePayment(1000, '9999999999', $redirectUrl, '1');
+            return redirect()->away($url);
 
-                    $encode = json_encode($transaction_data);
-                    $payloadMain = base64_encode($encode);
-                    // print_r($apiKey12);
-                    // print_r($payloadMain);
-                    $salt_index = 1;
-                    $payload = $payloadMain . "/pg/v1/pay" . $apiKey12;
-                    // print_r($payload);
-                    $sha256 = hash("sha256",$payload);
-                    $final_x_header = $sha256 . '###' . $salt_index;
-                    print_r($final_x_header);
+                //     $encode = json_encode($transaction_data);
+                //     $payloadMain = base64_encode($encode);
+                //     // print_r($apiKey12);
+                //     // print_r($payloadMain);
+                //     $salt_index = 1;
+                //     $payload = $payloadMain . "/pg/v1/pay" . $apiKey12;
+                //     // print_r($payload);
+                //     $sha256 = hash("sha256",$payload);
+                //     $final_x_header = $sha256 . '###' . $salt_index;
+                //     print_r($final_x_header);
 
                    
-                    // $request = json_encode(array('request'=>$payloadMain));
+                //     // $request = json_encode(array('request'=>$payloadMain));
                     
-                    $curl = curl_init();
+                //     $curl = curl_init();
 
-                    curl_setopt_array($curl, [
-                    CURLOPT_URL => "https://api.phonepe.com/apis/hermes/pg/v1/pay",
-                    // CURLOPT_URL => "https://api-preprod.phonepe.com/apis/pg-sandbox/pg/v1/pay",
-                    CURLOPT_RETURNTRANSFER => true,
-                    CURLOPT_ENCODING => "",
-                    CURLOPT_MAXREDIRS => 10,
-                    CURLOPT_TIMEOUT => 30,
-                    CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-                    CURLOPT_CUSTOMREQUEST => "POST",
-                    CURLOPT_POSTFIELDS => json_encode(['request' => $payloadMain]),
-                        CURLOPT_HTTPHEADER => [
-                            "Content-Type: application/json",
-                            "X-VERIFY: " .$final_x_header,
-                            "accept: application/json"
-                        ],
-                    ]);
+                //     curl_setopt_array($curl, [
+                //     CURLOPT_URL => "https://api.phonepe.com/apis/hermes/pg/v1/pay",
+                //     // CURLOPT_URL => "https://api-preprod.phonepe.com/apis/pg-sandbox/pg/v1/pay",
+                //     CURLOPT_RETURNTRANSFER => true,
+                //     CURLOPT_ENCODING => "",
+                //     CURLOPT_MAXREDIRS => 10,
+                //     CURLOPT_TIMEOUT => 30,
+                //     CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+                //     CURLOPT_CUSTOMREQUEST => "POST",
+                //     CURLOPT_POSTFIELDS => json_encode(['request' => $payloadMain]),
+                //         CURLOPT_HTTPHEADER => [
+                //             "Content-Type: application/json",
+                //             "X-VERIFY: " .$final_x_header,
+                //             "accept: application/json"
+                //         ],
+                //     ]);
 
-                $response = curl_exec($curl);
-                $err = curl_error($curl);
-                print_r(json_decode($response, true));
-                curl_close($curl);
+                // $response = curl_exec($curl);
+                // $err = curl_error($curl);
+                // print_r(json_decode($response, true));
+                // curl_close($curl);
 
-                if ($err) {
-                    echo "cURL Error #:" . $err;
-                } else {
-                    $res = json_decode($response);
+                // if ($err) {
+                //     echo "cURL Error #:" . $err;
+                // } else {
+                //     $res = json_decode($response);
 
-                    print_r($err);
+                //     print_r($err);
                     // Store information into database
 
                     $data = [
@@ -124,16 +128,16 @@ class PaymentController extends Controller
                             'payment_status' => 'PAYMENT_PENDING',
                             'order_id' => $get_order_id
                         ];
-                        dd($res);
+                        // dd($res);
                         Payment::create($data);
 
-                        if(isset($res->code) && ($res->code=='PAYMENT_INITIATED')){
-                            $payUrl=$res->data->instrumentResponse->redirectInfo->url;
-                            return redirect()->away($payUrl);
-                        }else{
-                                    dd('ERROR : ' . $res);
-                        }
-                }
+                //         if(isset($res->code) && ($res->code=='PAYMENT_INITIATED')){
+                //             $payUrl=$res->data->instrumentResponse->redirectInfo->url;
+                //             return redirect()->away($payUrl);
+                //         }else{
+                //                     dd('ERROR : ' . $res);
+                //         }
+                // }
             } 
             
     }

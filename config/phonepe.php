@@ -1,6 +1,11 @@
 <?php
-return [
-        'merchantId' => env('PHONEPE_MERCHANT_ID', 'PGTESTPAYUAT'), // Your Phone               
-        'apiKey' => env('PHONEPE_API_KEY', '099eb0cd-02cf-4e2a-8aca-3e6c6aff0399'), // Your PhonePe API Key
-        ];
-?>
+
+return array(
+    'merchantId' => env('PHONEPE_MERCHANT_ID'),
+    'merchantUserId' => env('PHONEPE_MERCHANT_USER_ID'),
+    'env' => env('PHONEPE_ENV'),
+    'saltKey' => env('PHONEPE_SALT_KEY'),
+    'saltIndex' => env('PHONEPE_SALT_INDEX'),
+    'redirectUrl' => env('PHONEPE_REDIRECT_URL'),
+    'callBackUrl' => env('PHONEPE_CALLBACK_URL')
+);

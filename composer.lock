@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "bfe12996eeecb6fdc8713a9fd9d431f8",
+    "content-hash": "7693205f859bad4c5dd70c13671ca897",
     "packages": [
         {
             "name": "brick/math",
@@ -209,6 +209,58 @@
                 "source": "https://github.com/dflydev/dflydev-dot-access-data/tree/v3.0.3"
             },
             "time": "2024-07-08T12:26:09+00:00"
+        },
+        {
+            "name": "dipesh79/laravel-phonepe",
+            "version": "1.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Dipesh79/LaravelPhonePe.git",
+                "reference": "286f3b26f1ab86f68543e1d40776b1f97cb14ca2"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Dipesh79/LaravelPhonePe/zipball/286f3b26f1ab86f68543e1d40776b1f97cb14ca2",
+                "reference": "286f3b26f1ab86f68543e1d40776b1f97cb14ca2",
+                "shasum": ""
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Dipesh79\\LaravelPhonePe\\LaravelPhonePeServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Dipesh79\\LaravelPhonePe\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Dipesh79",
+                    "email": "dipeshkhanal79@gmail.com",
+                    "homepage": "https://www.khanaldipesh.com.np",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Laravel PhonePe - Laravel PhonePe Payment Integration Library",
+            "support": {
+                "issues": "https://github.com/Dipesh79/LaravelPhonePe/issues",
+                "source": "https://github.com/Dipesh79/LaravelPhonePe/tree/1.0.1"
+            },
+            "funding": [
+                {
+                    "url": "https://www.patreon.com/dipeshkhanal",
+                    "type": "patreon"
+                }
+            ],
+            "time": "2024-05-04T04:22:30+00:00"
         },
         {
             "name": "doctrine/inflector",
