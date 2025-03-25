@@ -40,10 +40,10 @@ class PaymentController extends Controller
 
 
             if($name !='' && $amount !=''){            
-                // $merchantId = config('phonepe.merchantId');
-                // $apiKey12 = config('phonepe.apiKey');
-                $merchantId = "PGTESTPAYUAT";
-                $apiKey12 = "099eb0cd-02cf-4e2a-8aca-3e6c6aff0399";
+                $merchantId = config('phonepe.merchantId');
+                $apiKey12 = config('phonepe.apiKey');
+                // $merchantId = "PGTESTPAYUAT";
+                // $apiKey12 = "099eb0cd-02cf-4e2a-8aca-3e6c6aff0399";
                 print_r($apiKey12);
                 $redirectUrl = route('confirm');
                 $order_id = uniqid() . time();
@@ -81,8 +81,8 @@ class PaymentController extends Controller
                     $curl = curl_init();
 
                     curl_setopt_array($curl, [
-                    // CURLOPT_URL => "https://api.phonepe.com/apis/hermes/pg/v1/pay",
-                    CURLOPT_URL => "https://api-preprod.phonepe.com/apis/pg-sandbox/pg/v1/pay",
+                    CURLOPT_URL => "https://api.phonepe.com/apis/hermes/pg/v1/pay",
+                    // CURLOPT_URL => "https://api-preprod.phonepe.com/apis/pg-sandbox/pg/v1/pay",
                     CURLOPT_RETURNTRANSFER => true,
                     CURLOPT_ENCODING => "",
                     CURLOPT_MAXREDIRS => 10,
