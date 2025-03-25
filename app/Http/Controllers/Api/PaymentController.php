@@ -78,7 +78,8 @@ class PaymentController extends Controller
                     $curl = curl_init();
 
                     curl_setopt_array($curl, [
-                    CURLOPT_URL => "https://api.phonepe.com/apis/hermes/pg/v1/pay",
+                    // CURLOPT_URL => "https://api.phonepe.com/apis/hermes/pg/v1/pay",
+                    CURLOPT_URL => "https://api-preprod.phonepe.com/apis/pg-sandbox/pg/v1/pay",
                     CURLOPT_RETURNTRANSFER => true,
                     CURLOPT_ENCODING => "",
                     CURLOPT_MAXREDIRS => 10,
@@ -99,36 +100,36 @@ class PaymentController extends Controller
                 curl_close($curl);
 
                 if ($err) {
-                echo "cURL Error #:" . $err;
+                    echo "cURL Error #:" . $err;
                 } else {
-                $res = json_decode($response);
+                    $res = json_decode($response);
 
-                print_r($err);
-                // Store information into database
+                    print_r($err);
+                    // Store information into database
 
-                $data = [
-                    'merchantId' => $merchantId,
-                    'merchantTransactionId' => $order_id,
-                    "merchantUserId"=>$order_id,
-                    'amount' => $amount,
-                    'redirectUrl'=>$redirectUrl,
-                    'redirectMode'=>"POST",
-                    'callbackUrl'=>$redirectUrl,
-                    "paymentInstrument"=> json_encode([    
-                        "type"=> "PAY_PAGE",
-                ]),
-                    'payment_status' => 'PAYMENT_PENDING',
-                    'order_id' => $get_order_id
-                ];
-                dd($res);
-                    Payment::create($data);
+                    $data = [
+                            'merchantId' => $merchantId,
+                            'merchantTransactionId' => $order_id,
+                            "merchantUserId"=>$order_id,
+                            'amount' => $amount,
+                            'redirectUrl'=>$redirectUrl,
+                            'redirectMode'=>"POST",
+                            'callbackUrl'=>$redirectUrl,
+                            "paymentInstrument"=> json_encode([    
+                                "type"=> "PAY_PAGE",
+                            ]),
+                            'payment_status' => 'PAYMENT_PENDING',
+                            'order_id' => $get_order_id
+                        ];
+                        dd($res);
+                        Payment::create($data);
 
-                    if(isset($res->code) && ($res->code=='PAYMENT_INITIATED')){
-                        $payUrl=$res->data->instrumentResponse->redirectInfo->url;
-                        return redirect()->away($payUrl);
-                    }else{
-                                dd('ERROR : ' . $res);
-                    }
+                        if(isset($res->code) && ($res->code=='PAYMENT_INITIATED')){
+                            $payUrl=$res->data->instrumentResponse->redirectInfo->url;
+                            return redirect()->away($payUrl);
+                        }else{
+                                    dd('ERROR : ' . $res);
+                        }
                 }
             } 
             
