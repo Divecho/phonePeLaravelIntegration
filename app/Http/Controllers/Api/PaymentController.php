@@ -113,7 +113,7 @@ class PaymentController extends Controller
                     $res = json_decode($response);
 
                     print_r($err);
-                    Store information into database
+                    // Store information into database
 
                     $data = [
                             'merchantId' => $merchantId,
@@ -129,7 +129,7 @@ class PaymentController extends Controller
                             'payment_status' => 'PAYMENT_PENDING',
                             'order_id' => $get_order_id
                         ];
-                        // dd($res);
+                        dd($res);
                         Payment::create($data);
 
                         if(isset($res->code) && ($res->code=='PAYMENT_INITIATED')){
