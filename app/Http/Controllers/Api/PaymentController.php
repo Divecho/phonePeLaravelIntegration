@@ -46,7 +46,8 @@ class PaymentController extends Controller
                 $apiKey12 = "099eb0cd-02cf-4e2a-8aca-3e6c6aff0399";
                 print_r($apiKey12);
                 $redirectUrl = route('confirm');
-                $order_id = uniqid(); // Generate unique order id
+                $order_id = uniqid() . time();
+                // Generate unique order id
     
                 $transaction_data = array(
                     'merchantId' => $merchantId,
